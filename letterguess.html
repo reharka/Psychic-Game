@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Guess the Letter</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+</head>
+<body>
+<!-- Style using Bootstrap. Welcome the player and explain the game  -->
+
+<h1>"Guess the Letter" Game <small>| Can you outsmart the computer?</small></h1>
+<br>
+
+<div id="game">
+    <h4>Choose a letter in the alphabet to begin playing!</h4>
+</div>
+
+
+<script type="text/javascript">
+
+// Computer makes a choice.
+// Player guesses what computer chose.
+// Show what the player types.
+// If correct, 1 win and the game restarts.
+// Else, number of chances decreases.
+// Number of chances counts down from 9.
+// At the end of the chances, player losses 1 point and game restarts.
+
+var letter = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+
+var wins = 0;
+var losses = 0;
+var guessesLeft = 9;
+var guessesSoFar = [];
+var userGuess = null;
+
+var computerGuess = letter[Math.floor(Math.random() * letter.length)];
+    console.log("Wins: " + wins + " Losses: " + losses + " Guesses Left: " + guessesLeft + " Guesses so far: " + guessesSoFar + " Computer Guess: " + computerGuess);
+
+    document.onkeyup = function(event) {
+
+        var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
+
+        if (guessesSoFar.indexOf(userGuess) < 0 && letter.indexOf(userGuess) >= 0) {
+            guessesSoFar[guessesSoFar.length]=userGuess;
+            guessesLeft--;
+         }
+
+        if (computerGuess === userGuess) {
+            wins++;
+            console.log("You won!");
+            guessesLeft = 9;
+            guessesSoFar = [];
+            alert("You won! It's about time...");
+            computerGuess = letter[Math.floor(Math.random() * letter.length)];
+            console.log("Wins: " + wins + " Losses: " + losses + " Guesses Left: " + guessesLeft + " Guesses so far: " + guessesSoFar +" Computer Guess: " + computerGuess);
+        }
+
+  
+        if (guessesLeft === 0) {
+            losses++;
+            console.log("You lost!");
+            guessesLeft = 9;
+            guessesSoFar = [];
+            alert("Womp, womp... you suck!");
+            computerGuess = letter[Math.floor(Math.random() * letter.length)];
+            console.log("Wins: " + wins + " Losses: " + losses + " Guesses Left: " + guessesLeft + " Guesses so far: " + guessesSoFar +" Computer Guess: " + computerGuess);
+        }
+
+        var html = "<p><h4>Guess what letter I'm thinking of, if you dare...</h4></p>" + "<p><h4>Wins: " + wins + "</h4></p>" + "<p><h4>Losses: " + losses + "</h4></p>" + "<p><h4>Guesses Left: " + guessesLeft + "</h4></p>" + "<p><h4>Guesses so far: " + guessesSoFar + "</h4></p>";
+
+        document.querySelector("#game").innerHTML = html;
+
+    }
+
+</script>
+
+</body>
+</html>
