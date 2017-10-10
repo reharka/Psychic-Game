@@ -9,11 +9,11 @@
 <body>
 <!-- Style using Bootstrap. Welcome the player and explain the game  -->
 
-<h1>"Guess the Letter" Game <small>| Can you outsmart the computer?</small></h1>
+<h1>"Guess the Letter" Game <small>| Can you outsmart a computer?</small></h1>
 <br>
 
 <div id="game">
-    <h4>Choose a letter in the alphabet to begin playing!</h4>
+    <h4>Choose any letter in the alphabet to begin playing!</h4>
 </div>
 
 
@@ -57,7 +57,6 @@ var computerGuess = letter[Math.floor(Math.random() * letter.length)];
             console.log("Wins: " + wins + " Losses: " + losses + " Guesses Left: " + guessesLeft + " Guesses so far: " + guessesSoFar +" Computer Guess: " + computerGuess);
         }
 
-  
         if (guessesLeft === 0) {
             losses++;
             console.log("You lost!");
